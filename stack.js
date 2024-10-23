@@ -15,16 +15,19 @@ class Stack {
 
     add(value) {
         const newNode = new Node(value);
+
         if(this.top) {
             newNode.bottom = this.top;
             this.top.top = newNode;
             this.top = newNode;
+            return;
         }
+        
         this.top = newNode;
     };
 
     remove() {
-        
+
         if (this.top) {
 
             const oldTop = this.top; 
@@ -36,6 +39,19 @@ class Stack {
 
             oldTop.bottom = null; 
         }
+    }
+
+    find(value) {
+        let pointer = this.top;
+
+        while(pointer) {
+            if(pointer.value == value) {
+                return "Found " + value;
+            }
+            pointer = pointer.bottom;
+        }
+
+        return "Not found";
     }
 
     print() {
@@ -55,5 +71,7 @@ stack.add(5);
 stack.add(1);
 stack.add(3);
 stack.remove();
+
+console.log(stack.find(6));
 
 stack.print();
